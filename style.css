@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
@@ -46,7 +47,7 @@ i {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 14px;
+  margin-top: 24px;
 }
 .header-logo p {
   color: #FFF;
@@ -54,7 +55,7 @@ i {
   font-size: 16px;
 }
 .header-logo img {
-  width: 75%;
+  width: 100%;
 }
 
 @media screen and (max-width: 768px) {
@@ -69,7 +70,7 @@ i {
     font-size: 34px;
   }
   .header-logo img {
-    width: 160px;
+    width: 70%;
     margin-top: 46px;
   }
   .header-icons:nth-of-type(3) {
@@ -137,7 +138,7 @@ i {
 }
 @media screen and (max-width: 768px) {
   .hero {
-    min-height: 40vh;
+    min-height: 60vh;
   }
   .hero h1 {
     font-size: 14px;
@@ -237,7 +238,7 @@ i {
 }
 .haircut img {
   width: 100%;
-  max-width: 354px;
+  max-width: 600px;
   transition: transform 0.2s;
 }
 
@@ -269,99 +270,75 @@ i {
     max-width: 740px;
   }
 }
-.galeria {
-  position: relative;
-  padding: 15px;
-  max-width: 640px;
-  margin: 0 auto;
-}
-
-.gallery-wrapper {
-  overflow-x: auto;
-}
-
-.arrow-left,
-.arrow-right {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: auto;
-  bottom: 0;
-  font-size: 20px;
-  line-height: 250px;
-  width: 40px;
-  color: #fff;
-  transition: all 600ms ease-in-out;
-  background: linear-gradient(to left, transparent 0%, black 200%);
-  opacity: 0.1;
-  cursor: pointer;
-  border: none;
-}
-
-.arrow-left:hover,
-.arrow-right:hover {
-  opacity: 1;
-}
-
-.arrow-right {
-  right: 0;
-  left: auto;
-  text-align: right;
-  background: linear-gradient(to right, transparent 0%, black 200%);
-}
-
-.gallery {
+section.carrossel {
   display: flex;
-  flex-flow: row nowrap;
-  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
 }
 
-.item {
-  width: 250px;
-  height: 250px;
-  flex-shrink: 0;
-  transition: all 600ms ease-in-out;
-  opacity: 0.5;
+.carousel {
+  position: relative;
+  max-width: 100%;
+  width: 80%;
+  height: 51vh;
+  overflow: hidden;
+  border: 2px solid #044D2A;
+  border-radius: 10px;
+  background-color: #044D2A;
 }
 
-.current-item {
-  opacity: 1;
+.carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease;
 }
 
-/* This is from w3schools */
-/* 
-https://www.w3schools.com/howto/howto_css_hide_scrollbars.asp */
-/* Hide scrollbar for Chrome, Safari and Opera */
-.gallery-wrapper::-webkit-scrollbar {
-  display: none;
+.carousel-item {
+  min-width: 100%;
+  padding: 2px;
+  transition: opacity 0.5s ease;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
-.gallery-wrapper {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+.carousel-item img {
+  width: 100%;
+  height: 50vh;
+  border-radius: 10px;
 }
 
-.cyan {
-  background: cyan;
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #FFF;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 100;
 }
 
-.deeppink {
-  background: deeppink;
+.prev1 {
+  left: 10px;
 }
 
-.turquoise {
-  background: turquoise;
+.next {
+  right: 10px;
 }
 
-.darkblue {
-  background: darkblue;
+@media (min-width: 768px) {
+  .carousel-inner {
+    flex-wrap: nowrap;
+  }
+  .carousel-item {
+    min-width: 33.3333333333%; /* Mostra três itens lado a lado */
+  }
 }
-
-.purple {
-  background: purple;
+@media (max-width: 767px) {
+  .carousel-item {
+    min-width: 100%;
+  }
 }
-
 .footer {
   display: flex;
   flex-direction: column;
@@ -390,7 +367,7 @@ https://www.w3schools.com/howto/howto_css_hide_scrollbars.asp */
   margin-top: 14px;
 }
 .footer-logo img {
-  width: 50%;
+  width: 70%;
 }
 
 body {

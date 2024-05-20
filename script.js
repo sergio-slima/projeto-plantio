@@ -1,35 +1,44 @@
 AOS.init();
 
-const controls = document.querySelectorAll(".control");
-let currentItem = 0;
-const items = document.querySelectorAll(".item");
-const maxItems = items.length;
+// Carrossel
+/* scripts.js */
+function showSlide(carouselId, index) {
+  const carousel = document.getElementById(carouselId);
+  const carouselInner = carousel.querySelector('.carousel-inner');
+  const slides = carousel.querySelectorAll('.carousel-item');
+  const itemsPerSlide = window.innerWidth >= 768 ? 3 : 1;
+  const totalSlides = slides.length;
 
-controls.forEach((control) => {
-  control.addEventListener("click", (e) => {
-    isLeft = e.target.classList.contains("arrow-left");
+  if (index >= totalSlides) index = 0;
+  if (index < 0) index = totalSlides - itemsPerSlide;
 
-    if (isLeft) {
-      currentItem -= 1;
-    } else {
-      currentItem += 1;
-    }
+  const offset = -index * (100 / itemsPerSlide);
+  carouselInner.style.transform = `translateX(${offset}%)`;
 
-    if (currentItem >= maxItems) {
-      currentItem = 0;
-    }
+  carousel.dataset.currentIndex = index;
+}
 
-    if (currentItem < 0) {
-      currentItem = maxItems - 1;
-    }
+function nextSlide(carouselId) {
+  const carousel = document.getElementById(carouselId);
+  const currentIndex = parseInt(carousel.dataset.currentIndex) || 0;
+  showSlide(carouselId, currentIndex + (window.innerWidth >= 768 ? 3 : 1));
+}
 
-    items.forEach((item) => item.classList.remove("current-item"));
+function prevSlide(carouselId) {
+  const carousel = document.getElementById(carouselId);
+  const currentIndex = parseInt(carousel.dataset.currentIndex) || 0;
+  showSlide(carouselId, currentIndex - (window.innerWidth >= 768 ? 3 : 1));
+}
 
-    items[currentItem].scrollIntoView({
-      behavior: "smooth",
-      inline: "center"
-    });
+// Inicializar carrosséis
+document.querySelectorAll('.carousel').forEach(carousel => {
+  carousel.dataset.currentIndex = 0;
+  showSlide(carousel.id, 0);
+});
 
-    items[currentItem].classList.add("current-item");
+window.addEventListener('resize', () => {
+  document.querySelectorAll('.carousel').forEach(carousel => {
+      showSlide(carousel.id, parseInt(carousel.dataset.currentIndex));
   });
 });
+
